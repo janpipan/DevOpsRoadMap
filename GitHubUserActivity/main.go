@@ -10,13 +10,17 @@ import (
 )
 
 type Event struct {
-	Type string `json:"type"`
-	Repo Repo   `json:"repo"`
+	Type    string      `json:"type"`
+	Repo    Repo        `json:"repo"`
+	Payload interface{} `json:"payload"`
 }
 
 type Repo struct {
 	Name string `json:"name"`
 	Url  string `json:"url"`
+}
+
+type Actitivity struct {
 }
 
 type ErrorResponse struct {
@@ -51,6 +55,8 @@ func checkGitHubUser(user string) error {
 	return nil
 }
 
+func getActivities(events []Event)
+
 func main() {
 
 	// check if github user exists
@@ -73,15 +79,10 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// print response body data
-	// fmt.Println(string(responseData))
-
 	var responseObject []Event
 	json.Unmarshal(responseData, &responseObject)
 
-	// fmt.Println(responseObject[1].Repo)
-
 	for _, event := range responseObject {
-		fmt.Println(event.Type)
+		fmt.Println(event.Payload.(map[string]interface{})[""])
 	}
 }
