@@ -128,7 +128,10 @@ func printEventMessage(event Event) string {
 	case "PullRequestReviewThreadEvent":
 		return "PullRequestReviewThreadEvent"
 	case "PushEvent":
-		return fmt.Sprintf("Pushed %d commits to %s", int(payload["size"].(float64)), event.Repo.Name)
+		if size, ok := payload["size"].(float64); ok {
+			return fmt.Sprintf("Pushed %d commits to %s", int(size), event.Repo.Name)
+		}
+		return ""
 	case "ReleaseEvent":
 		return "ReleaseEvent"
 	case "SponsorshipEvent":
