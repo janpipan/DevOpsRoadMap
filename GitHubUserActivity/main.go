@@ -55,8 +55,6 @@ func checkGitHubUser(user string) error {
 	return nil
 }
 
-func getActivities(events []Event)
-
 func main() {
 
 	// check if github user exists
